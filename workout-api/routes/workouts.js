@@ -7,10 +7,10 @@ const {
   deleteWorkout,
   updateWorkout,
 } = require("../controllers/workoutController");
-const requireAuth = require("../middelware/requireAuth")
+const requireAuth = require("../middelware/requireAuth");
 
 // require auth for all workout routes
-Router.use(requireAuth )
+Router.use(requireAuth);
 
 Router.get("/", getWorkouts);
 
@@ -22,11 +22,10 @@ Router.post("/", createWorkout);
 
 // delete method
 
-Router.delete("/:id", deleteWorkout)
+Router.delete("/:id", deleteWorkout);
 
 // patch method
 
-Router.patch("/:id", updateWorkout)
-
+Router.patch("/:id", updateWorkout);
 
 module.exports = Router;

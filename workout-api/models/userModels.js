@@ -1,39 +1,43 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const token = require("../controllers/userController")
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  userName: {
-    type: String,
-    required: true,
-  },
-  mobile: {
-    type: Number,
-    required: true,
-  },
-  age: {
-    type: Number,
-    // maxlength: 85,
-    required: true,
-  },
+const userSchema = new Schema(
+  {
+    userName: {
+      type: String,
+      required: true,
+    },
+    mobile: {
+      type: Number,
+      required: true,
+    },
+    age: {
+      type: Number,
+      // maxlength: 85,
+      required: true,
+    },
 
-  email: {
-    type: String,
-    regex: { valid: true },
-    required: true,
-    unique: true,
+    email: {
+      type: String,
+      regex: { valid: true },
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    confirmPassword: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  confirmPassword: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 // stattic login method
 userSchema.statics.login = async function (userName, email, password) {
@@ -94,6 +98,7 @@ userSchema.statics.signup = async function (
     email,
     password: hash,
     confirmPassword,
+    token
   });
 
   // console.log('user', user);
